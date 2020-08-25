@@ -1,0 +1,438 @@
+html {
+    box-sizing: border-box;
+    background-color: #f2f2f2;
+    scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    position: relative;
+    font-family: ProximaNova, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+body {
+    max-width: 1900px;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+ul,
+ol,
+li,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+button:focus,
+input:focus,
+a:focus {
+    outline: transparent;
+}
+
+.container {
+    max-width: 1900px;
+    padding: 0 50px;
+    margin: 0 auto;
+}
+
+.content {
+    padding: 0 87px;
+}
+
+.title {
+    position: relative;
+    z-index: 1;
+    font-size: 100px;
+    line-height: 85px;
+    @include f900;
+    color: $gray-black;
+    text-shadow: 0 0 10px #fff;
+
+    &::before {
+        position: absolute;
+        top: -25px;
+        left: 0;
+        width: 99px;
+        height: 18px;
+        content: "";
+        background-image: url(../images/icons/zig-zag.svg);
+    }
+}
+
+.anchor {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    clip: rect(0 0 0 0);
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    max-width: 220px;
+
+    &__avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        transition: box-shadow ease 0.3s;
+    }
+
+    &__name {
+        position: relative;
+        z-index: 1;
+        padding: 10px 5px;
+        margin-left: 15px;
+        overflow: hidden;
+        color: $gray;
+        background-color: transparent;
+        border-radius: 7px;
+        transition: all ease 0.3s;
+
+        &::before {
+            content: "";
+            @include focus-line;
+            background-color: #dcdfdb;
+        }
+    }
+
+    &:hover,
+    &:focus {
+        .user__avatar {
+            box-shadow: 0 0 20px $gray;
+        }
+    }
+
+    &:hover {
+        .user__name {
+            background-color: #dcdfdb;
+        }
+    }
+
+    &:focus .user__name::before {
+        width: 100%;
+        transition: 0.3s;
+    }
+}
+
+.link {
+    position: relative;
+    z-index: 2;
+    min-height: 44px;
+    padding-right: 65px;
+    padding-left: 20px;
+    overflow: hidden;
+    font-size: 25px;
+    color: $blue;
+    border-radius: 10px;
+    transition: 0.3s;
+
+    &__arrow {
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        width: 28px;
+        height: 21px;
+        stroke: #98b8f6;
+        transform: translateY(-50%);
+    }
+
+    &__page {
+        @include focus-line;
+        background-color: $blue;
+    }
+
+    &:hover {
+        color: #fff;
+        background-color: $blue;
+
+        .link__arrow {
+            stroke: #fff;
+        }
+    }
+
+    &:focus {
+        color: #fff;
+
+        .link__page {
+            width: 100%;
+            transition: width ease 0.3s, color ease 0.3s;
+        }
+
+        .link__arrow {
+            stroke: #fff;
+        }
+    }
+
+    &:focus::before {
+        color: #fff;
+    }
+}
+
+.input,
+.textarea {
+    position: relative;
+
+    &__border::before,
+    &__border::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 3px;
+        content: "";
+        background-color: $blue;
+        transition: 0.3s;
+    }
+
+    &__border::after {
+        top: auto;
+        right: 0;
+        bottom: 0;
+        left: auto;
+    }
+
+    &__focus::before,
+    &__focus::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3px;
+        height: 0;
+        content: "";
+        background-color: $blue;
+        transition: 0.4s;
+    }
+
+    &__focus::after {
+        top: auto;
+        right: 0;
+        bottom: 0;
+        left: auto;
+    }
+
+    &__row {
+        width: 100%;
+        height: 60px;
+        padding-left: 23px;
+        border: 1px solid #d2d2d2;
+        border-radius: 5px;
+        transition: 0.4s;
+
+        &::placeholder {
+            font-size: 20px;
+            @include f300;
+            color: #ccc;
+        }
+
+        &:focus ~ .input__border::before,
+        &:focus ~ .input__border::after {
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        &:focus ~ .input__border .input__focus::before,
+        &:focus ~ .input__border .input__focus::after {
+            height: 100%;
+            transition: 0.4s;
+        }
+    }
+}
+
+.textarea {
+    &__row {
+        display: block;
+        height: 150px;
+        padding-top: 13px;
+        resize: none;
+        outline: transparent;
+
+        &:focus ~ .textarea__border::before,
+        &:focus ~ .textarea__border::after {
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        &:focus ~ .textarea__border .textarea__focus::before,
+        &:focus ~ .textarea__border .textarea__focus::after {
+            height: 100%;
+            transition: 0.4s;
+        }
+    }
+}
+
+.social {
+    display: flex;
+
+    &__icon {
+        transition: 0.3s;
+    }
+
+    &__link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        transition: 0.3s;
+
+        & + & {
+            margin-left: 20px;
+        }
+
+        &:hover,
+        &:focus {
+            background-color: $gray;
+
+            .social__icon {
+                fill: #fff;
+            }
+        }
+    }
+}
+
+.slider {
+    display: none;
+    margin: 0 auto 30px;
+    background-color: #fff;
+
+    &__box {
+        display: block;
+        height: 100%;
+        max-height: calc(100vh - 30px);
+    }
+
+    &__box.fancybox-content {
+        padding: 0;
+        padding-bottom: 90px;
+        overflow: visible;
+    }
+
+    &__img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &__wrapper {
+        .fancybox-button {
+            background-color: transparent;
+            outline: transparent;
+
+            &:hover,
+            &:focus {
+                background-color: rgba(0, 0, 0, 0.5);
+                transition: 0.5s;
+
+                .fancybox-svg {
+                    filter: drop-shadow(0 0 10px #fff);
+                }
+            }
+        }
+
+        .fancybox-button--arrow_left {
+            left: calc(100vw - 97%);
+        }
+
+        .fancybox-button--arrow_right {
+            right: calc(100vw - 97%);
+        }
+
+        .fancybox-icon {
+            fill: #fff;
+        }
+    }
+
+    &__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 90px;
+        padding: 20px;
+    }
+
+    &__title {
+        font-size: 20px;
+    }
+
+    &__data {
+        margin-right: auto;
+        margin-left: 20px;
+        color: $gray;
+    }
+
+    &__user {
+        margin-left: 20px;
+    }
+}
+
+.back-top {
+    position: fixed;
+    right: 10px;
+    bottom: 100px;
+    z-index: 10;
+    display: none;
+    width: 50px;
+    height: 50px;
+    background-color: $gray-black;
+    border-color: transparent;
+    border-radius: 50%;
+
+    &:hover,
+    &:focus {
+        filter: brightness(1.3);
+        outline: transparent;
+    }
+
+    &::before,
+    &::after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        content: "";
+        transform: translate(-50%, -50%);
+    }
+
+    &::before {
+        width: 5px;
+        height: 25px;
+        background-color: #f5f0f6;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+
+    &::after {
+        top: 22px;
+        width: 15px;
+        height: 15px;
+        border-top: 5px solid #f5f0f6;
+        border-left: 5px solid #f5f0f6;
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+}
