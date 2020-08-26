@@ -189,9 +189,9 @@ $(function () {
         }).done(function () {
             setTimeout(function () {
                 // Done Functions
-                //fancybox=======================================================================
-                    $(".contact__button").fancybox({});
-                // end fancybox==================================================================
+                $(".contact__form").addClass("contact__form--active");
+                $(".contact__popup-wrapper").addClass("contact__popup-wrapper--active");
+                $(".contact__icon").addClass("contact__icon--active");
                 th.trigger("reset");
             }, 1000);
         });

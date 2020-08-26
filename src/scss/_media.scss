@@ -236,6 +236,18 @@
         &__form {
             max-width: 700px;
             margin-left: 0;
+
+            &::before {
+                top: -395px;
+                left: 312px;
+                height: 195%;
+                transform: rotate(90deg);
+                transform-origin: left;
+            }
+
+            &--active::before {
+                width: 410px;
+            }
         }
     }
 }
@@ -856,6 +868,17 @@
 
         &__subtitle {
             font-size: 50px;
+        }
+    }
+
+    .contact {
+        &__popup-wrapper {
+            font-size: 25px;
+        }
+
+        &__icon {
+            width: 100px;
+            height: 100px;
         }
     }
 
